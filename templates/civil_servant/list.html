@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="main--content">
+        <div class="panel">
+            <div class="records--header">
+                <div class="title fa-shopping-bag"><h3 class="h3">Listado de
+                    Funcionarios</h3>
+                    <p>Total {{ total }}
+                        Funcionarios</p></div>
+                <div class="actions">
+                    <div class="form-group" style="padding-right: 10px">
+                        <input ype="text" id="search"
+                               class=" form-control"
+                               placeholder="Buscar...">
+                    </div>
+                    <div class="form-group">
+                        <a href="{% url 'civil_servant:crear' %}"
+                           class="addProduct btn btn-lg btn-rounded
+                           btn-info">Agregar Funcionario</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="records--list table-responsive" data-title="Listado Funcionarios">
+                <table class="table style--2" id="recordsListView">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th class="not-sortable">Avatar</th>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Entidad</th>
+                        <th>Estado</th>
+                        <th class="not-sortable">Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for civil_servant in civil_servants %}
+                        <tr>
+                            <td>{{ civil_servant.identification }}</td>
+                            <td>
+                                {{ civil_servant.identification_type | upper }}
+                            </td>
+                            <td><img
+                                    src="{% static 'assets/img/avatars/01_80x80.png' %}"
+                                    alt="{{ civil_servant.get_full_name }}">
+                            </td>
+                            <td>{{ civil_servant.get_full_name }}</td>
+                            <td>{{ civil_servant.address }}</td>
+                            <td>{{ civil_servant.telephone }}</td>
+                            <td>{{ civil_servant.email }}</td>
+                            <td>{{ civil_servant.entity }}</td>
+                            <td>
+                                {% if civil_servant.deleted_at == None %}
+                                    <span class="label
+                                label-success">Activo</span>
+                                {% else %}
+                                    <span class="label
+                                    label-danger">Inactivo</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="dropleft">
+                                    <a href="#"
+                                       class="btn-link"
+                                       data-toggle="dropdown">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a href="#largeModal"
+                                           data-slug="{{ civil_servant.slug }}"
+                                           data-toggle="modal"
+                                           data-model-name="funcionario"
+                                           data-model-plural="funcionarios"
+                                           class="dropdown-item
+                                           editar">Editar</a>
+                                        {% if user.is_superuser %}
+                                            <a href="#"
+                                               data-model-name="funcionario"
+                                               data-model-plural="funcionarios"
+                                               data-slug="{{ civil_servant.slug }}"
+                                               class="dropdown-item
+                                           eliminar">Eliminar</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="largeModal" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header"><h5 class="modal-title">
+                            Editar
+                            Funcionario</h5>
+                            <button type="button" class="close"
+                                    data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" id="modal-form"
+                                  enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <h3 class="text-black-50">Información
+                                    Personal</h3>
+                                <section>
+                                    <div class="row">
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label>
+                                            <span class="label-text">Nombre:
+                                                *</span>
+                                                    {{ form.first_name }}
+                                                    <span class="validate-error"
+                                                    >{{ form.first_name.errors }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span class="label-text">Apellido: *</span>
+                                                    {{ form.last_name }}
+                                                    <span class="validate-error"
+                                                    >{{ form.last_name.errors }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label> <span
+                                                        class="label-text">Email: *</span>
+                                                    {{ form.email }}
+                                                    <span class="validate-error"
+                                                    >{{ form.email.errors }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label>
+                                            <span class="label-text">T.
+                                        identificación: *</span>
+                                                    {{ form.identification_type }}
+                                                    <span class="validate-error"
+                                                    >{{ form.identification_type.errors }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label>
+                                            <span class="label-text">
+                                                N° identificación: *</span>
+                                                    {{ form.identification }}
+                                                    <span class="validate-error"
+                                                    >{{ form.identification.errors }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label>
+                                             <span class="label-text">
+                                                 Teléfono: *</span>
+                                                    {{ form.telephone }}
+                                                    <span class="validate-error"
+                                                    >{{ form.telephone.errors }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span class="label-text">
+                                                        Dirección:*</span>
+                                                    {{ form.address }}
+                                                    <span class="validate-error"
+                                                    >{{ form.address.errors }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6 col-xs-12">
+                                            <div class="form-group">
+                                                <label>
+                                                    <span class="label-text">
+                                                        Entidad:*</span>
+                                                    {{ form.entity }}
+                                                    <span class="validate-error"
+                                                    >{{ form.entity.errors }}</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label> <span
+                                                        class="label-text">Avatar:
+                                        </span>
+                                                    <br>
+                                                    {{ form.avatar }}
+                                                </label>
+                                                <span class="validate-error"
+                                                >{{ form.avatar.errors }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit"
+                                    class="btn btn-default"
+                                    data-dismiss="modal">Cerrar
+                            </button>
+                            <button type="button" id="send"
+                                    data-sweet-alert="success"
+                                    class="btn btn-success">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

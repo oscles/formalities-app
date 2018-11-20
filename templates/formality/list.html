@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="main--content">
+        <div class="panel">
+            <div class="records--header">
+                <div class="title fa-shopping-bag"><h3 class="h3">Listado de
+                    Trámites</h3>
+                    <p>Total {{ total }}
+                        Trámites</p></div>
+                <div class="actions">
+                    <div class="form-group" style="padding-right: 10px">
+                        <input ype="text" id="search"
+                               class=" form-control"
+                               placeholder="Buscar...">
+                    </div>
+                    <div class="form-group">
+                        <a href="{% url 'formality:crear' %}"
+                           class="addProduct btn btn-lg btn-rounded
+                           btn-info">Agregar Trámite</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="records--list" data-title="Listado Trámites">
+                <table id="recordsListView">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Realización</th>
+                        <th>Horario</th>
+                        <th>Funcionario</th>
+                        <th>Estado</th>
+                        <th class="not-sortable">Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for formality in formalities %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ formality.name }}</td>
+                            <td>{{ formality.description }}</td>
+                            <td>{{ formality.realization_form }}</td>
+                            <td>{{ formality.schedule }}</td>
+                            <td>{{ formality.civil_servant }}</td>
+                            <td>
+                                {% if formality.deleted_at == None %}
+                                    <span class="label
+                                label-success">Activo</span>
+                                {% else %}
+                                    <span class="label
+                                    label-danger">Inactivo</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="dropleft">
+                                    <a href="#"
+                                       class="btn-link"
+                                       data-toggle="dropdown">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a href="#"
+                                           data-slug="{{ formality.slug }}"
+                                           data-model-plural="tramites"
+                                           class="dropdown-item ver">Ver</a>
+                                        <a href="#largeModal"
+                                           data-toggle="modal"
+                                           data-model-name="trámite"
+                                           data-model-plural="tramites"
+                                           data-slug="{{ formality.slug }}"
+                                           class="dropdown-item
+                                           editar">Editar</a>
+                                        {% if user.is_superuser %}
+                                            <a href="#"
+                                               data-model-name="trámite"
+                                               data-model-plural="tramites"
+                                               data-slug="{{ formality.slug }}"
+                                               class="dropdown-item
+                                           eliminar">Eliminar</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="largeModal" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header"><h5
+                                class="modal-title">Editar Trámite</h5>
+                            <button type="button" class="close"
+                                    data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" id="modal-form"
+                                  enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>
+                                        <span class="label-text">Nombre *</span>
+                                        {{ form.name }}
+                                        <span class="validate-error"
+                                        >{{ form.name.error }}</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <span class="label-text">Descripción</span>
+                                        {{ form.description }}
+                                        <span class="validate-error"
+                                        >{{ form.description.error }}</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <span class="label-text">Requisitos *</span>
+                                        {{ form.requirements }}
+                                        <span class="validate-error"
+                                        >{{ form.requirements.error }}</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                            <span class="label-text">Forma de
+                                realización</span>
+                                        {{ form.realization_form }}
+                                        <span class="validate-error"
+                                        >{{ form.realization_form.error }}</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <span class="label-text">Horario de
+                            Atención</span>
+                                        {{ form.schedule }}
+                                        <span class="validate-error"
+                                        >{{ form.schedule.error }}</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label><span class="label-text">Funcionario
+                            Encargado *</span>
+                                        {{ form.civil_servant }}
+                                        <span class="validate-error"
+                                        >{{ form.civil_servant.error }}</span>
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">Cerrar
+                            </button>
+                            <button type="button" id="send"
+                                    data-sweet-alert="success"
+                                    class="btn btn-success">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+{% endblock %}

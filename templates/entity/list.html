@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section class="main--content">
+        <div class="panel">
+            <div class="records--header">
+                <div class="title fa-shopping-bag"><h3 class="h3">Listado de
+                    Entidades</h3>
+                    <p>Total {{ total }}
+                        Funcionarios</p></div>
+                <div class="actions">
+                    <div class="form-group" style="padding-right: 10px">
+                        <input ype="text" id="search"
+                               class=" form-control"
+                               placeholder="Buscar...">
+                    </div>
+                    <div class="form-group">
+                        <a href="{% url 'entity:crear' %}"
+                           class="addProduct btn btn-lg btn-rounded
+                           btn-info">Agregar Entidad</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="records--list" data-title="Listado Entidades">
+                <table id="recordsListView">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NIT</th>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>Sitio Web</th>
+                        <th>Estado</th>
+                        <th class="not-sortable">Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ entity.nit }}</td>
+                            <td>{{ entity.name }}</td>
+                            <td>{{ entity.address }}</td>
+                            <td>{{ entity.telephone }}</td>
+                            <td>{{ entity.website }}</td>
+                            <td>
+                                {% if entity.deleted_at == None %}
+                                    <span class="label
+                                label-success">Activo</span>
+                                {% else %}
+                                    <span class="label
+                                    label-danger">Inactivo</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <div class="dropleft">
+                                    <a href="#"
+                                       class="btn-link"
+                                       data-toggle="dropdown">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a href="#largeModal"
+                                           data-toggle="modal"
+                                           data-model-name="entidad"
+                                           data-model-plural="entidades"
+                                           data-slug="{{ entity.slug }}"
+                                           class="dropdown-item editar">
+                                            Editar</a>
+                                        {% if user.is_superuser %}
+                                            <a href="#"
+                                               data-model-name="entidad"
+                                               data-model-plural="entidades"
+                                               data-slug="{{ entity.slug }}"
+                                               class="dropdown-item
+                                           eliminar">Eliminar</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div id="largeModal" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header"><h5 class="modal-title">
+                            Editar
+                            Entidad</h5>
+                            <button type="button" class="close"
+                                    data-dismiss="modal">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" id="modal-form">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label>
+                                        <span class="label-text">Nombre *</span>
+                                        {{ form.name }}
+                                        <span class="validate-error"
+                                        >{{ form.name.error }}</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <span class="label-text">NIT *</span>
+                                        {{ form.nit }}
+                                        <span class="validate-error"
+                                        >{{ form.nit.error }}</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <span class="label-text">Dirección *</span>
+                                        {{ form.address }}
+                                        <span class="validate-error"
+                                        >{{ form.address.error }}</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label><span
+                                            class="label-text">Teléfono *</span>
+                                        {{ form.telephone }}
+                                        <span class="validate-error"
+                                        >{{ form.telephone.error }}</span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label><span
+                                            class="label-text">Sitio Web</span>
+                                        {{ form.website }}
+                                        <span class="validate-error"
+                                        >{{ form.website.error }}</span>
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                    data-dismiss="modal">Cerrar
+                            </button>
+                            <button type="button" id="send"
+                                    data-sweet-alert="success"
+                                    class="btn btn-success">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

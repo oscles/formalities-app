@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+<html dir="ltr" lang="en" class="no-outlines">
+{% include 'inclusions/head.html' %}
+<body>
+<div class="wrapper">
+    <div class="m-account-w" data-bg-img="assets/img/account/wrapper-bg
+    .jpg">
+        <div class="m-account">
+            <div class="row no-gutters flex-row-reverse">
+                <div class="col-md-6">
+                    <div class="m-account--content-w"
+                         data-bg-img="assets/img/account/content-bg.jpg">
+                        <div class="m-account--content"><h2
+                                class="h2">Tengo una cuenta?</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur
+                                adipisicing elit.</p><a
+                                    href="{% url 'login' %}"
+                                    class="btn
+                                                        btn-rounded">Ingresar
+                                Ahora</a></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="m-account--form-w">
+                        <div class="m-account--form">
+                            <div class="logo"><img
+                                    src="{% static 'assets/img/logo.png' %}"
+                                    alt=""></div>
+                            <form method="post">
+                                {% csrf_token %}
+                                <label class="m-account--title">Crea tu
+                                    cuenta</label>
+                                {% include 'inclusion_tags/success-message.html' %}
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><i
+                                                class="fas fa-user"></i></div>
+                                        <input type="text" name="username"
+                                               placeholder="Username"
+                                               class="form-control"
+                                               autocomplete="off" required>
+                                        <span>{{ form.username.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><i
+                                                class="fas fa-envelope"></i>
+                                        </div>
+                                        <input type="email" name="email"
+                                               placeholder="Email"
+                                               class="form-control"
+                                               autocomplete="off" required>
+                                        <span>{{ form.email.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><i
+                                                class="fas fa-key"></i></div>
+                                        <input type="password" name="password"
+                                               placeholder="Password"
+                                               class="form-control"
+                                               autocomplete="off" required>
+                                    </div>
+                                </div>
+                                <div class="m-account--actions">
+                                    <button type="submit"
+                                            class="btn btn-block btn-rounded btn-info">
+                                        Registrar
+                                    </button>
+                                </div>
+                                <div class="m-account--footer"><p>&copy; 2018
+                                    Oscloud Technology</p></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'inclusions/javascript-resources.html' %}
+</body>
+</html>

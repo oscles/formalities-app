@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="main--content">
+        <div class="col-xs-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Crear Trámite</h3>
+                </div>
+                {% include 'inclusion_tags/success-message.html' %}
+                <div class="panel-content">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>
+                                <span class="label-text">Nombre *</span>
+                                {{ form.name }}
+                                <span class="validate-error">{{ form.name.error }}</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span class="label-text">Descripción</span>
+                                {{ form.description }}
+                                <span class="validate-error">{{ form.description.error }}</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span class="label-text">Requisitos *</span>
+                                {{ form.requirements }}
+                                <span class="validate-error">{{ form.requirements.error }}</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                            <span class="label-text">Forma de
+                                realización</span>
+                                {{ form.realization_form }}
+                                <span class="validate-error">{{ form.realization_form.error }}</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label><span class="label-text">Horario de
+                            Atención</span>
+                                {{ form.schedule }}
+                                <span class="validate-error">{{ form.schedule.error }}</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label><span class="label-text">Funcionario
+                            Encargado *</span>
+                                {{ form.civil_servant }}
+                                <span class="validate-error">{{ form.civil_servant.error }}</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label><span class="label-text">Cargar Documentos
+                                </span>
+
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="submit" value="Guardar"
+                                   class="btn btn-sm btn-rounded btn-success">
+                            <a href="{% url 'formality:listar' %}"
+                               class="btn btn-sm btn-rounded btn-outline-secondary">
+                                Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </section>
+{% endblock %}

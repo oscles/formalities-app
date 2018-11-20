@@ -1,0 +1,145 @@
+{% include 'inclusions/headers.html' %}
+{% load static %}
+<aside class="sidebar" data-trigger="scrollbar">
+    <div class="sidebar--profile">
+        <div class="profile--img"><a href="{% url 'civil_servant:home' %}">
+            <img
+                    src="{% static 'assets/img/avatars/01_80x80.png' %}" alt=""
+                    class="rounded-circle"> </a></div>
+        <div class="profile--name">
+            <a href="#" class="btn-link">{{ user.get_full_name }}</a></div>
+        <div class="profile--nav">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}" class="nav-link"
+                       title="Logout"> <i class="fa fa-sign-out-alt"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% include 'inclusions/navigation.html' %}
+</aside>
+<main class="main--container">
+    {% block content %}
+        <section class="main--content">
+            <div class="row gutter-20">
+                <div class="col-md-4 col-xs-12">
+                    <div class="panel">
+                        <div class="miniStats--panel text-white bg-blue">
+                            <div class="miniStats--header" data-overlay="0.1">
+                                <p class="miniStats--chart"
+                                   data-trigger="sparkline" data-type="bar"
+                                   data-width="4" data-height="30"
+                                   data-color="#fff">
+                                    5,6,9,4,9,5,3,5,9,15,3,2,2,3,9,11,9,7,20,9,7,6</p>
+                            </div>
+                            <div class="miniStats--body"><i
+                                    class="miniStats--icon fa fa-address-card text-white"></i>
+                                <h3 class="miniStats--title h4
+                                text-white">Trámites</h3>
+                                <p class="miniStats--num">{{ total_formalities }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <div class="panel">
+                        <div class="miniStats--panel text-white bg-orange">
+                            <div class="miniStats--header" data-overlay="0.1">
+                                <p class="miniStats--chart"
+                                   data-trigger="sparkline" data-type="bar"
+                                   data-width="4" data-height="30"
+                                   data-color="#fff">
+                                    2,2,3,9,11,9,7,20,9,7,6,5,6,9,4,9,5,3,5,9,15,3</p>
+                            </div>
+                            <div class="miniStats--body"><i
+                                    class="miniStats--icon fa fa-building
+                                    text-white"></i>
+                                <h3 class="miniStats--title h4 text-white">
+                                    Entidades</h3>
+                                <p class="miniStats--num">{{ total_entities }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12">
+                    <div class="panel">
+                        <div class="miniStats--panel text-white bg-green">
+                            <div class="miniStats--header" data-overlay="0.1">
+                                <p class="miniStats--chart"
+                                   data-trigger="sparkline" data-type="bar"
+                                   data-width="4" data-height="30"
+                                   data-color="#fff">
+                                    2,2,3,9,11,9,7,20,9,7,6,5,6,9,4,9,5,3,5,9,15,3</p>
+                            </div>
+                            <div class="miniStats--body"><i
+                                    class="miniStats--icon fa fa-user
+                                    text-white"></i>
+                                <h3 class="miniStats--title h4 text-white">
+                                    Funcionarios</h3>
+                                <p class="miniStats--num">{{ total_civil_servant }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-heading"><h3 class="panel-title">
+                            Solicitudes de Trámites</h3>
+                        </div>
+                        <div class="panel-chart col-12">
+                            <div id="oficial-chart">
+                                <canvas id="total-formalities"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Trámites más visitados</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table style--2">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>F. Realización</th>
+                                        <th>Funcionario</th>
+                                        <th>Horario</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for formality in formalities_recients %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td class="text-justify"
+                                            >{{ formality.name }}</td>
+                                            <td class="text-justify"
+                                            >{{ formality.realization_form }}</td>
+                                            <td>{{ formality.civil_servant }}</td>
+                                            <td>{{ formality.schedule }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endblock %}
+
+    <footer class="main--footer main--footer-light"><p class="text-center">
+        Copyright &copy;
+        <a href="#">Oscloud Technology</a>. All Rights
+        Reserved.</p>
+    </footer>
+</main>
+{% include 'inclusions/javascript-resources.html' %}
+</body>
+</html>

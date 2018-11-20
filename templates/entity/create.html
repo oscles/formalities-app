@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="main--content">
+        <div class="col-xs-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Crear Entidad</h3>
+                </div>
+                {% include 'inclusion_tags/success-message.html' %}
+                <div class="panel-content">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>
+                                <span class="label-text">Nombre *</span>
+                                {{ form.name }}
+                                <span class="validate-error">{{ form.name.error }}</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span class="label-text">NIT *</span>
+                                {{ form.nit }}
+                                <span class="validate-error">{{ form.nit.error }}</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span class="label-text">Dirección *</span>
+                                {{ form.address }}
+                                <span class="validate-error">{{ form.address.error }}</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label><span class="label-text">Teléfono *</span>
+                                {{ form.telephone }}
+                                <span class="validate-error">{{ form.telephone.error }}</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label><span class="label-text">Sitio Web</span>
+                                {{ form.website }}
+                                <span class="validate-error">{{ form.website.error }}</span>
+                            </label>
+                        </div>
+                        <button type="submit"
+                                class="btn btn-sm btn-rounded btn-success">
+                            Guardar
+                        </button>
+                        <a href="{% url 'entity:listar' %}"
+                           class="btn btn-sm btn-rounded btn-outline-secondary">
+                            Cancelar
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

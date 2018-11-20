@@ -1,0 +1,55 @@
+<div class="sidebar--nav">
+    <ul>
+        {% if user.is_superuser %}
+            <li class="active">
+                <a href="#">Entidades</a>
+                <ul>
+                    <li>
+                        <a href="{% url 'entity:crear' %}">
+                            <i class="fa fa-save"></i>
+                            <span>Crear</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'entity:listar' %}">
+                            <i class="fa fa-tasks"></i>
+                            <span>Listar</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        {% endif %}
+        <li><a href="#">Funcionarios</a>
+            <ul>
+                <li>
+                    <a href="{% url 'civil_servant:crear' %}">
+                        <i class="fa fa-save"></i>
+                        <span>Crear</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'civil_servant:listar' %}"> <i
+                            class="fa fa-tasks"></i>
+                        <span>Listar</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">Trámites</a>
+            <ul>
+                <li>
+                    <a href="{% url 'formality:crear' %}">
+                        <i class="fa fa-save"></i>
+                        <span>Crear</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'formality:listar' %}"> <i
+                            class="fa fa-tasks"></i>
+                        <span>Listar</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,8 @@
+{% if messages %}
+    {% for message in messages %}
+        {% ifequal message.tags 'success' %}
+            <span id="{{ message.tags }}"
+                  data-message="{{ message }}"></span>
+        {% endifequal %}
+    {% endfor %}
+{% endif %}

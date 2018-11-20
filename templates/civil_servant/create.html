@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="main--content">
+        <div class="col-xs-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">Crear Funcionario</h3>
+                </div>
+                {% include 'inclusion_tags/success-message.html' %}
+                <div class="panel-content">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h3 class="text-black-50">Información Personal</h3>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>
+                                            <span class="label-text">Nombre:
+                                                *</span>
+                                            {{ form.first_name }}
+                                        </label>
+                                        <span class="validate-error"
+                                        >{{ form.first_name.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label> <span
+                                                class="label-text">Apellido: *
+                                        </span>
+                                            {{ form.last_name }}
+                                        </label>
+                                        <span class="validate-error"
+                                        >{{ form.last_name.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group"><label> <span
+                                            class="label-text">Email: *</span>
+                                        {{ form.email }}
+                                    </label>
+                                        <span class="validate-error"
+                                        >{{ form.email.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>
+                                            <span class="label-text">Tipo
+                                        identificación: *</span>
+                                            {{ form.identification_type }}
+                                        </label>
+                                        <span class="validate-error"
+                                        >{{ form.identification_type.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>
+                                            <span class="label-text">N°
+                                                identificación: *
+                                    </span>
+                                            {{ form.identification }}
+                                        </label>
+                                        <span class="validate-error"
+                                        >{{ form.identification.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>
+                                            <span class="label-text">Teléfono: *
+                                    </span>
+                                            {{ form.telephone }}
+                                        </label>
+                                        <span class="validate-error"
+                                        >{{ form.telephone.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group"><label> <span
+                                            class="label-text">Dirección:
+                                        *</span>
+                                        {{ form.address }}
+                                    </label>
+                                        <span class="validate-error"
+                                        >{{ form.address.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group"><label> <span
+                                            class="label-text">Entidad:
+                                        *</span>
+                                        {{ form.entity }}
+                                    </label>
+                                        <span class="validate-error"
+                                        >{{ form.entity.errors }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <h3 class="text-black-50">Información de
+                            Autenticación</h3>
+                        <section>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group"><label> <span
+                                            class="label-text">Usuario:
+                                        *</span>
+                                        {{ form.username }}
+                                    </label>
+                                        <span class="validate-error"
+                                        >{{ form.username.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label> <span
+                                                class="label-text">Contraseña:
+                                        *</span>
+                                            {{ form.password }}
+                                        </label>
+                                        <span class="validate-error"
+                                        >{{ form.password.errors }}</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label> <span
+                                                class="label-text">Avatar:
+                                        </span>
+                                        <br>
+                                         {{ form.avatar }}
+                                        </label>
+                                        <span class="validate-error"
+                                        >{{ form.avatar.errors }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <button type="submit"
+                                class="btn btn-sm btn-rounded btn-success">
+                            Guardar
+                        </button>
+                        <a href="{% url 'civil_servant:listar' %}"
+                           class="btn btn-sm btn-rounded btn-outline-secondary">
+                            Cancelar
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

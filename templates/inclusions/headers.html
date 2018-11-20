@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class="no-outlines">
+{% include 'inclusions/head.html' %}
+<body>
+<div class="wrapper">
+    <header class="navbar navbar-fixed">
+        <div class="navbar--header">
+            <a href="{% url 'civil_servant:home' %}" class="logo text-center">
+                <img
+                        style="width: 70px"
+                        src="{% static 'assets/img/logo.png' %}"
+                        alt="logo_tu_trámite">
+            </a> <a href="#"
+                    class="navbar--btn"
+                    data-toggle="sidebar"
+                    title="Toggle Sidebar">
+            <i class="fa fa-bars"></i> </a></div>
+        <a href="#" class="navbar--btn" data-toggle="sidebar"
+           title="Toggle Sidebar"> <i class="fa fa-bars"></i> </a>
+        <div class="navbar--nav ml-auto">
+            <ul class="nav">
+                <li class="nav-item dropdown nav--user online">
+                    <a href="#"
+                       class="nav-link"
+                       data-toggle="dropdown">
+                        <img src="{% static 'assets/img/avatars/01_80x80.png' %}"
+                             alt=""
+                             class="rounded-circle"> <span>{{ user.get_full_name }}</span>
+                        <i
+                                class="fa fa-angle-down"></i> </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'logout' %}"><i
+                                class="fa fa-power-off"></i>Salir</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </header>
