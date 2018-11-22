@@ -22,8 +22,14 @@ from django.contrib.auth.views import LogoutView, LoginView
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views import defaults
 
 from apps.api.router import routes
+
+'''
+handler404 = defaults.page_not_found(template_name='404.html')
+handler500 = defaults.server_error(template_name='500.html')
+'''
 
 urlpatterns = [
 	path('', LoginView.as_view(template_name='login.html'), name='login'),

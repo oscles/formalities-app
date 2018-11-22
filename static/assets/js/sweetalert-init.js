@@ -29,7 +29,11 @@ function actionCommand(options, alert = true) {
 		method,
 		data,
 		success: (resp) => {
-			return alert ? swal('Operación Exitosa!', msg, 'success') : false
+			return alert ? swal(
+				'Operación Exitosa!',
+				msg,
+				'success',
+			) : false;
 		},
 		error: (error) => {
 			let listErrors = error.responseJSON;
@@ -49,7 +53,7 @@ function actionCommand(options, alert = true) {
 function getObject(modelNamePlural, slug, callback) {
 	$.ajax({
 		beforeSend,
-		url: `/${modelNamePlural}/listar?slug=${slug}`,
+		url: `/${modelNamePlural}/listar?slug=${slug}` || path,
 		method: 'get',
 		success: resp => callback(resp),
 		error: error => swal(
@@ -84,6 +88,7 @@ document.body.addEventListener('click', (evt) => {
 		actionCommand(options);
 		const div = elementClicked.parentElement.parentElement;
 		div.parentElement.parentElement.remove();
+		setTimeout(() => location.reload(), 2000);
 
 	} else if (elementClicked.classList.contains('editar')) {
 		getObject(modelNamePlural, slug, data => {
@@ -116,11 +121,96 @@ document.body.addEventListener('click', (evt) => {
 						msg: `${modelName} ${objectName} ha sido Actualizado.`,
 					};
 					actionCommand(options);
+					setTimeout(() => location.reload(), 2000);
 				});
 			}
 		)
 	}
 });
+
+function load_graphic() {
+	try {
+		const ctx = document.getElementById("total-formalities").getContext('2d');
+		const months = [
+			"Ene", "Feb", "Mar",
+			"Abr", "May", "Jun",
+			"Jul", "Ago", "Sep",
+			"Oct", "Nov", "Dic"
+		];
+		const result = [
+			0, 0, 0, 0,
+			0, 0, 0, 0,
+			0, 0, 0, 0
+		];
+
+		// obteniendo informacion del total del trámites por mes del servidor
+		$.ajax({
+			beforeSend,
+			url: '/api/tramites/counter/',
+			method: 'get',
+			success: resp => {
+				resp.formalities.forEach(item => {
+					result[item.created_at__month - 1] = item.total;
+				});
+				draw(result);
+			}
+		});
+
+		function draw(resp) {
+			const chartFormality = new Chart(
+				ctx,
+				{
+					type: 'bar',
+					data: {
+						labels: months,
+						datasets: [{
+							label: '# de Trámites',
+							data: resp,
+							backgroundColor: [
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)',
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(255, 206, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(255, 159, 64, 0.2)'
+							],
+							borderColor: [
+								'rgba(255,99,132,1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)',
+								'rgba(255,99,132,1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)',
+								'rgba(255, 159, 64, 1)'
+							],
+							borderWidth: 1
+						}]
+					},
+					options: {
+						scales: {
+							yAxes: [{
+								ticks: {
+									beginAtZero: true
+								}
+							}]
+						}
+					}
+				});
+		}
+	} catch (e) {
+	}
+}
 
 const validateErrors = Array.from(document.querySelectorAll('.validate-error'));
 let isError = validateErrors.some(error => error.innerText.length > 0);
@@ -141,64 +231,6 @@ const successMessage = document.getElementById('success');
 if (successMessage)
 	swal('Operación Exitosa!', successMessage.dataset.message, 'success');
 
-try {
-	const ctx = document.getElementById("total-formalities").getContext('2d');
-	const chartFormality = new Chart(
-		ctx,
-		{
-			type: 'bar',
-			data: {
-				labels: [
-					"Ene", "Feb", "Mar",
-					"Abr", "May", "Jun",
-					"Jul", "Ago", "Sep",
-					"Oct", "Nov", "Dic"
-				],
-				datasets: [{
-					label: '# de Trámites',
-					data: [12, 19, 3, 5, 2, 3, 25, 12, 8, 12, 35, 20],
-					backgroundColor: [
-						'rgba(255, 99, 132, 0.2)',
-						'rgba(54, 162, 235, 0.2)',
-						'rgba(255, 206, 86, 0.2)',
-						'rgba(75, 192, 192, 0.2)',
-						'rgba(153, 102, 255, 0.2)',
-						'rgba(255, 159, 64, 0.2)',
-						'rgba(255, 99, 132, 0.2)',
-						'rgba(54, 162, 235, 0.2)',
-						'rgba(255, 206, 86, 0.2)',
-						'rgba(75, 192, 192, 0.2)',
-						'rgba(153, 102, 255, 0.2)',
-						'rgba(255, 159, 64, 0.2)'
-					],
-					borderColor: [
-						'rgba(255,99,132,1)',
-						'rgba(54, 162, 235, 1)',
-						'rgba(255, 206, 86, 1)',
-						'rgba(75, 192, 192, 1)',
-						'rgba(153, 102, 255, 1)',
-						'rgba(255, 159, 64, 1)',
-						'rgba(255,99,132,1)',
-						'rgba(54, 162, 235, 1)',
-						'rgba(255, 206, 86, 1)',
-						'rgba(75, 192, 192, 1)',
-						'rgba(153, 102, 255, 1)',
-						'rgba(255, 159, 64, 1)'
-					],
-					borderWidth: 1
-				}]
-			},
-			options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero: true
-						}
-					}]
-				}
-			}
-		});
-} catch (e) {
+load_graphic();
 
-}
 

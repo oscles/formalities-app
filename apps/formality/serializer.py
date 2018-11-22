@@ -24,5 +24,6 @@ class FormalitySerializer(serializers.ModelSerializer):
 			'schedule',
 			'civil_servant',
 			'visited',
+			'created_at',
 			'attachments'
 		)

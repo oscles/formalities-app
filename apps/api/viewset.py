@@ -1,4 +1,6 @@
-from rest_framework import viewsets
+from django.db.models import Count
+from rest_framework import viewsets, renderers
+from rest_framework.decorators import action
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 
@@ -42,8 +44,29 @@ class AttachmentViewSet(viewsets.ModelViewSet):
 class FormalityViewSet(viewsets.ModelViewSet):
 	queryset = Formality.objects_all.all()
 	serializer_class = FormalitySerializer
-	parser_classes = (MultiPartParser, FormParser, )
+	parser_classes = (MultiPartParser, FormParser,)
 	lookup_field = 'slug'
+
+	@action(detail=False)
+	def counter(self, request, *args, **kwargs):
+		response = self._get_response(formalities=Formality)
+		return Response(response)
+
+	def _get_response(self, *args, **kwargs):
+		response = {}
+		is_superuser = self.request.user.is_superuser
+		if is_superuser:
+			for attr, value in kwargs.items():
+				response.update({attr: self._get_for_month(value.objects_all)})
+		else:
+			for attr, value in kwargs.items():
+				response.update({attr: self._get_for_month(value.objects)})
+		return response
+
+	def _get_for_month(self, model_manager):
+		return model_manager.values('created_at__month') \
+			.annotate(total=Count('created_at__month')) \
+			.order_by('created_at__month')
 
 	def list(self, request, *args, **kwargs):
 		if self.request.query_params:
