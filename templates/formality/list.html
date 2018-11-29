@@ -11,7 +11,7 @@
                         Trámites</p></div>
                 <div class="actions">
                     <div class="form-group" style="padding-right: 10px">
-                        <input ype="text" id="search"
+                        <input type="text" id="search"
                                class=" form-control"
                                placeholder="Buscar...">
                     </div>
@@ -64,7 +64,8 @@
                                         <i class="fa fa-ellipsis-v"></i>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a href="#"
+                                        <a href="#showModal"
+                                           data-toggle="modal"
                                            data-slug="{{ formality.slug }}"
                                            data-model-plural="tramites"
                                            class="dropdown-item ver">Ver</a>
@@ -91,84 +92,179 @@
                     </tbody>
                 </table>
             </div>
-            <div id="largeModal" class="modal fade">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header"><h5
-                                class="modal-title">Editar Trámite</h5>
-                            <button type="button" class="close"
-                                    data-dismiss="modal">
-                                &times;
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="post" id="modal-form"
-                                  enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <label>
-                                        <span class="label-text">Nombre *</span>
-                                        {{ form.name }}
-                                        <span class="validate-error"
-                                        >{{ form.name.error }}</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        <span class="label-text">Descripción</span>
-                                        {{ form.description }}
-                                        <span class="validate-error"
-                                        >{{ form.description.error }}</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>
-                                        <span class="label-text">Requisitos *</span>
-                                        {{ form.requirements }}
-                                        <span class="validate-error"
-                                        >{{ form.requirements.error }}</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>
+        </div>
+        <div id="largeModal" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header"><h5
+                            class="modal-title">Editar Trámite</h5>
+                        <button type="button" class="close"
+                                data-dismiss="modal">
+                            &times;
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" id="modal-form"
+                              enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label>
+                                    <span class="label-text">Nombre *</span>
+                                    {{ form.name }}
+                                    <span class="validate-error"
+                                    >{{ form.name.error }}</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <span class="label-text">Descripción</span>
+                                    {{ form.description }}
+                                    <span class="validate-error"
+                                    >{{ form.description.error }}</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <span class="label-text">Requisitos *</span>
+                                    {{ form.requirements }}
+                                    <span class="validate-error"
+                                    >{{ form.requirements.error }}</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
                             <span class="label-text">Forma de
                                 realización</span>
-                                        {{ form.realization_form }}
-                                        <span class="validate-error"
-                                        >{{ form.realization_form.error }}</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>
+                                    {{ form.realization_form }}
+                                    <span class="validate-error"
+                                    >{{ form.realization_form.error }}</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
                                         <span class="label-text">Horario de
                             Atención</span>
-                                        {{ form.schedule }}
-                                        <span class="validate-error"
-                                        >{{ form.schedule.error }}</span>
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label><span class="label-text">Funcionario
+                                    {{ form.schedule }}
+                                    <span class="validate-error"
+                                    >{{ form.schedule.error }}</span>
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label><span class="label-text">Funcionario
                             Encargado *</span>
-                                        {{ form.civil_servant }}
-                                        <span class="validate-error"
-                                        >{{ form.civil_servant.error }}</span>
-                                    </label>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default"
-                                    data-dismiss="modal">Cerrar
-                            </button>
-                            <button type="button" id="send"
-                                    data-sweet-alert="success"
-                                    class="btn btn-success">
-                                Guardar
-                            </button>
-                        </div>
+                                    {{ form.civil_servant }}
+                                    <span class="validate-error"
+                                    >{{ form.civil_servant.error }}</span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">Cerrar
+                        </button>
+                        <button type="button" id="send"
+                                data-sweet-alert="success"
+                                class="btn btn-success">
+                            Guardar
+                        </button>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div id="showModal" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header"><h5
+                            class="modal-title">Detalles del Trámite</h5>
+                        <button type="button" class="close"
+                                data-dismiss="modal">&times;
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-simple">
+                            <tbody>
+                            <tr>
+                                <td>Nombre:</td>
+                                <th id="name"></th>
+                            </tr>
+                            <tr>
+                                <td>Descripción:</td>
+                                <th id="description"></th>
+                            </tr>
+                            <tr>
+                                <td>Fecha de Creación:</td>
+                                <th id="created_at"></th>
+                            </tr>
+                            <tr>
+                                <td>Forma de Realización:</td>
+                                <th id="realization"></th>
+                            </tr>
+                            <tr>
+                                <td>Requisitos:</td>
+                                <th id="requirements"></th>
+                            </tr>
+                            <tr>
+                                <td>Horario:</td>
+                                <th id="schedule"></th>
+                            </tr>
+                            <tr>
+                                <td>Cantidad de Visitas:</td>
+                                <th id="total"></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <br>
+
+                        <div class="col-sm-10">
+                            <span>* Luego de seleccionar el
+                                        archivo este será cargado
+                                automaticamente </span>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"
+                                          id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <form method="post"
+                                          enctype="multipart/form-data">
+                                        <input type="file"
+                                               class="custom-file-input"
+                                               id="inputAttach"
+                                               aria-describedby="inputGroupFileAddon01">
+                                    </form>
+                                    <label class="custom-file-label"
+                                           for="inputGroupFile01">Cargar
+                                        Archivo
+                                    </label>
+                                </div>
+                            </div>
+                            <table class="table">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Archivos</th>
+                                    <th scope="col" id="action">Acción</th>
+                                </tr>
+                                </thead>
+                                <tbody id="iterator-files">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock %}
+
+
+
+
+

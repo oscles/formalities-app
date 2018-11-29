@@ -1,3 +1,10 @@
+var formality_id = null;
+
+function getElement(tag, value) {
+	document.getElementById(tag).innerText = value;
+}
+
+// obtiene el csrftoken para el vio de peticiones ajax
 const beforeSend = (xhr, settings) => {
 	function getCookie(name) {
 		let cookieValue = null;
@@ -21,6 +28,7 @@ const beforeSend = (xhr, settings) => {
 	}
 };
 
+// funcion generica para hacer peticiones al servidor
 function actionCommand(options, alert = true) {
 	let {path, data, method, msg} = options;
 	$.ajax({
@@ -36,6 +44,7 @@ function actionCommand(options, alert = true) {
 			) : false;
 		},
 		error: (error) => {
+			//captura los errores de respuesta del servidor y los renderiza
 			let listErrors = error.responseJSON;
 			if (listErrors) {
 				let keys = Object.keys(listErrors);
@@ -50,10 +59,11 @@ function actionCommand(options, alert = true) {
 	});
 }
 
+//obtiene un objeto del servidor pasandole el nombre y el slug
 function getObject(modelNamePlural, slug, callback) {
 	$.ajax({
 		beforeSend,
-		url: `/${modelNamePlural}/listar?slug=${slug}` || path,
+		url: `/${modelNamePlural}/listar?slug=${slug}`,
 		method: 'get',
 		success: resp => callback(resp),
 		error: error => swal(
@@ -74,11 +84,53 @@ document.body.addEventListener('click', (evt) => {
 	let options = {};
 
 	if (elementClicked.classList.contains('ver')) {
-		options = {
-			path: `/api/${modelNamePlural}?visited=True&slug=${slug}`,
+		$.ajax({
+			beforeSend,
+			url: `/api/${modelNamePlural}?visited=True&slug=${slug}`,
 			method: 'get',
-		};
-		actionCommand(options, false);
+			success: resp => {
+				formality_id = resp.id;
+				const name = getElement('name', resp.name);
+				const description = getElement('description', resp.description);
+				const created_at = getElement('created_at', resp.created_at);
+				const realization = getElement('realization', resp.realization_form);
+				const requirements = getElement('requirements', resp.requirements);
+				const schedule = getElement('schedule', resp.schedule);
+				const total = getElement('total', resp.visited);
+
+				const tbody = document.getElementById('iterator-files');
+				while (tbody.lastElementChild)
+					tbody.lastElementChild.remove();
+
+				if (resp.attachments.length > 0) {
+					resp.attachments.forEach((attach, index) => {
+						const tr = document.createElement('tr');
+						if (document.getElementById('action')) {
+							tr.innerHTML += `<th scope='row'>${index + 1}</th>
+                                <td>
+                                	<a href='${attach.attachment}'>
+                                	<i style='font-size: 1.5em' 
+                                	class='text-muted fa fa-download'></i></a>
+                                </td>
+                                <td>
+                                	<span style="cursor: pointer; 
+                                	font-size:1.5em"
+                                	data-id="${attach.id}" 
+                                	class=" btn borrar-attach text-danger fa fa-trash"></span>
+                                </td>`;
+						} else {
+							tr.innerHTML += `<th scope='row'>${index + 1}</th>
+                                <td>
+                                	<a href='${attach.attachment}'>
+                                	<i style='font-size: 1.5em' 
+                                	class='text-muted fa fa-download'></i></a>
+                                </td>`;
+						}
+						tbody.appendChild(tr);
+					});
+				}
+			}
+		});
 	} else if (elementClicked.classList.contains('eliminar')) {
 		options = {
 			path: `/${modelNamePlural}/eliminar/${slug}/`,
@@ -126,6 +178,18 @@ document.body.addEventListener('click', (evt) => {
 			}
 		)
 	}
+
+	if (elementClicked.classList.contains('borrar-attach')) {
+		const id = elementClicked.dataset.id;
+		options = {
+			path: `/api/attachments/${id}`,
+			method: 'delete',
+			msg: `El archivo ha sido eliminado con exito.`,
+		};
+		actionCommand(options);
+		const div = elementClicked.parentElement.parentElement;
+		div.remove();
+	}
 });
 
 function load_graphic() {
@@ -156,6 +220,7 @@ function load_graphic() {
 			}
 		});
 
+		// dibuja el grafico en la pantalla
 		function draw(resp) {
 			const chartFormality = new Chart(
 				ctx,
@@ -233,4 +298,28 @@ if (successMessage)
 
 load_graphic();
 
+//load files view
+try {
+	document.getElementById('inputAttach')
+	.addEventListener('change', (e) => {
+		const file = e.target.files[0];
+		$.ajax({
+			beforeSend,
+			url: `/api/attachments/`,
+			method: 'post',
+			contentType: 'multipart/form-data',
+			data: {'formality': formality_id, 'attachment': file},
+			success: resp => {
+				console.log(resp);
+			},
+			error: error => swal(
+				'Operación Fallída!',
+				error.message,
+				'error'
+			)
+		});
+	});
+} catch (e) {
+	
+}
 

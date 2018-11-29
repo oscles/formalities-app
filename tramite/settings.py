@@ -123,7 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 LOGIN_URL = reverse_lazy('login')
 LOGIN_REDIRECT_URL = reverse_lazy('civil_servant:home')
-LOGOUT_REDIRECT_URL = reverse_lazy('login')
+LOGOUT_REDIRECT_URL = reverse_lazy('index')
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
@@ -136,8 +136,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'osnaiderluis94@gmail.com'
-EMAIL_HOST_PASSWORD = '3205429349'
+EMAIL_HOST_USER = 'correo-electronico'
+EMAIL_HOST_PASSWORD = 'contraseña'
 EMAIL_PORT = 587
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 

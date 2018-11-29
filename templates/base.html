@@ -1,11 +1,21 @@
 {% include 'inclusions/headers.html' %}
 {% load static %}
+
 <aside class="sidebar" data-trigger="scrollbar">
     <div class="sidebar--profile">
-        <div class="profile--img"><a href="{% url 'civil_servant:home' %}">
-            <img
-                    src="{% static 'assets/img/avatars/01_80x80.png' %}" alt=""
-                    class="rounded-circle"> </a></div>
+        <div class="profile--img">
+            <a href="{% url 'civil_servant:home' %}">
+                {% if user.avatar %}
+                    <img src="{{ user.avatar }}"
+                         alt="avatar_usuario"
+                         class="rounded-circle">
+                {% else %}
+                    <img src="{% static 'assets/img/avatars/avatar-default.png' %}"
+                         alt="avatar_usuario"
+                         class="rounded-circle">
+                {% endif %}
+            </a>
+        </div>
         <div class="profile--name">
             <a href="#" class="btn-link">{{ user.get_full_name }}</a></div>
         <div class="profile--nav">
@@ -133,12 +143,7 @@
             </div>
         </section>
     {% endblock %}
-
-    <footer class="main--footer main--footer-light"><p class="text-center">
-        Copyright &copy;
-        <a href="#">Oscloud Technology</a>. All Rights
-        Reserved.</p>
-    </footer>
+    {% include 'inclusions/footer.html' %}
 </main>
 {% include 'inclusions/javascript-resources.html' %}
 </body>

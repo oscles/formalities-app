@@ -1,7 +1,7 @@
 from django.urls import path
 
 from ..civil_servant.views import (
-	HomeTemplateView,
+	HomeCivilServantTemplateView,
 	CivilServantCreateView,
 	CivilServantListView,
 	CivilServantDeleteView,
@@ -11,7 +11,7 @@ from ..civil_servant.views import (
 app_name = 'civil_servant'
 
 urlpatterns = [
-	path('', HomeTemplateView.as_view(), name='home'),
+	path('', HomeCivilServantTemplateView.as_view(), name='home'),
 	path('listar/', CivilServantListView.as_view(), name='listar'),
 	path('crear/', CivilServantCreateView.as_view(), name='crear'),
 	path('eliminar/<slug>/', CivilServantDeleteView.as_view(), name='eliminar'),

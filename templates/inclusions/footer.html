@@ -1,0 +1,62 @@
+{% load static %}
+<style>
+    .sponsors {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        align-items: normal;
+        padding: 0;
+    }
+
+    .sponsors li {
+        padding: .5em .5em;
+        display: inline-flex;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+        list-style: none;
+    }
+
+    .sponsors img {
+        width: 200px;
+    }
+</style>
+<footer class="main--footer main--footer-light">
+    <ul class="sponsors">
+        <li>
+            <a href="http://es.presidencia.gov.co/" target="_blank">
+                <img src="{% static 'assets/img/sponsors/gobierno_colombia.png' %}"
+                     alt="gobierno_colombia">
+            </a>
+        </li>
+        <li>
+            <a href="https://observatorioplanificacion.cepal.org/" target="_blank">
+                <img src="{% static 'assets/img/sponsors/todos_por_un_nuevo_pais.png' %}"
+                     alt="todos_por_un_nuevo_pais">
+            </a>
+        </li>
+        <li>
+            <a href="https://www.mintic.gov.co" target="_blank">
+                <img src="{% static 'assets/img/sponsors/mintic.png' %}"
+                     alt="mintic">
+            </a>
+        </li>
+        <li>
+            <a href="https://www.mineducacion.gov.co/" target="_blank">
+                <img src="{% static 'assets/img/sponsors/mineducacion.png' %}"
+                     alt="mineducacion">
+            </a>
+        </li>
+        <li>
+            <a href="http://estrategia.gobiernoenlinea.gov.co/" target="_blank">
+                <img src="{% static 'assets/img/sponsors/gobierno_digital.png' %}"
+                     alt="gobierno_digital">
+            </a>
+        </li>
+    </ul>
+    <p class="text-center">
+        Copyright &copy; Tu Trámite. All Rights
+        Reserved.</p>
+</footer>

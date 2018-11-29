@@ -6,7 +6,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import (
 	TemplateView, CreateView, DeleteView,
-	UpdateView
 )
 
 from ..core.mixins import DeleteViewMixin
@@ -19,17 +18,37 @@ from ..entity.models import Entity
 from ..civil_servant.models import CivilServant
 
 
-class HomeTemplateView(LoginRequiredMixin, TemplateView):
+class HomeAnonymousUserTemplateView(TemplateView):
+	template_name = 'index.html'
+
+	def get_context_data(self, **kwargs):
+		formalities = Formality.objects.all()
+		kwargs.update({
+			'formalities': formalities.order_by('-visited')
+		})
+		return super().get_context_data(**kwargs)
+
+
+class HomeCivilServantTemplateView(LoginRequiredMixin, TemplateView):
 	template_name = 'base.html'
 
 	def get_context_data(self, **kwargs):
-		formalities = Formality.objects_all.all()
-		kwargs.update({
-			'total_civil_servant': CivilServant.objects_all.count(),
-			'total_entities': Entity.objects_all.count(),
-			'total_formalities': formalities.count(),
-			'formalities_recients': formalities.order_by('-visited')[:10]
-		})
+		if self.request.user.is_superuser:
+			formalities = Formality.objects_all.all()
+			kwargs.update({
+				'total_civil_servant': CivilServant.objects_all.count(),
+				'total_entities': Entity.objects_all.count(),
+				'total_formalities': formalities.count(),
+				'formalities_recients': formalities.order_by('-visited')[:10]
+			})
+		else:
+			formalities = Formality.objects.all()
+			kwargs.update({
+				'total_civil_servant': CivilServant.objects.count(),
+				'total_entities': Entity.objects.count(),
+				'total_formalities': formalities.count(),
+				'formalities_recients': formalities.order_by('-visited')[:10]
+			})
 		return super().get_context_data(**kwargs)
 
 

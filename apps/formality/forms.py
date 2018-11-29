@@ -1,9 +1,24 @@
 from django import forms
+from django.core.validators import FileExtensionValidator
 
 from .models import Formality
 
 
 class FormalityForm(forms.ModelForm):
+	file = forms.FileField(
+		widget=forms.ClearableFileInput(
+			attrs={'multiple': True}
+		),
+		required=False,
+		validators=[
+			FileExtensionValidator(
+				allowed_extensions=[
+					'xls', 'xlsx', 'pdf',
+					'doc', 'docx', 'odt',
+					'pptx'
+				]
+			)]
+	)
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -17,7 +32,7 @@ class FormalityForm(forms.ModelForm):
 			'requirements',
 			'realization_form',
 			'schedule',
-			'civil_servant'
+			'civil_servant',
 		)
 
 		widgets = {
@@ -47,5 +62,6 @@ class FormalityForm(forms.ModelForm):
 			'civil_servant': forms.Select(attrs={
 				'class': 'form-control'
 			})
-
 		}
+
+

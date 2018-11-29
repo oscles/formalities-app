@@ -59,17 +59,9 @@
                                 <span class="label-text">
                                     Cargar Documentos</span>
                             </label>
-                            <div class="custom-file">
-                                <input type="file"
-                                       class="custom-file-input"
-                                       name="file"
-                                       multiple
-                                       id="customFileLang" lang="es">
-                                <label class="custom-file-label"
-                                       for="customFileLang">Seleccionar
-                                    Archivo</label>
-                                <span class="validate-error"></span>
-                            </div>
+                            {{ form.file }}
+                            <span class="validate-error">
+                                    {{ form.file.errors }}</span>
                         </div>
 
                         <div>
@@ -83,5 +75,6 @@
                     </form>
                 </div>
             </div>
+        </div>
     </section>
 {% endblock %}

@@ -6,7 +6,8 @@
 <div class="wrapper">
     <header class="navbar navbar-fixed">
         <div class="navbar--header">
-            <a href="{% url 'civil_servant:home' %}" class="logo text-center">
+            <a href="{% url 'civil_servant:home' %}"
+               class="logo text-center">
                 <img
                         style="width: 70px"
                         src="{% static 'assets/img/logo.png' %}"
@@ -24,9 +25,16 @@
                     <a href="#"
                        class="nav-link"
                        data-toggle="dropdown">
-                        <img src="{% static 'assets/img/avatars/01_80x80.png' %}"
+                        {% if user.avatar %}
+                            <img src="{{ user.avatar }}"
                              alt=""
-                             class="rounded-circle"> <span>{{ user.get_full_name }}</span>
+                             class="rounded-circle">
+                        {% else %}
+                            <img src="{% static 'assets/img/avatars/avatar-default.png' %}"
+                             alt="avatar_usuario"
+                             class="rounded-circle">
+                        {% endif %}
+                        <span>{{ user.get_full_name }}</span>
                         <i
                                 class="fa fa-angle-down"></i> </a>
                     <ul class="dropdown-menu">

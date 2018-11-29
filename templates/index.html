@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Oscloud Technolgy">
+
+    <!-- Page Title -->
+    <title> Tú Trámite </title>
+
+    <!-- Icon fonts -->
+    <link href="{% static 'assets/css/fontawesome-all.min.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/home/css/flaticon.css' %}" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'assets/home/css/bootstrap.min.css' %}"
+          rel="stylesheet">
+
+    <!-- Plugins for this template -->
+    <link href="{% static 'assets/home/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/home/css/owl.carousel.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/home/css/owl.theme.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/home/css/slick.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/home/css/slick-theme.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/home/css/owl.transitions.css' %}"
+          rel="stylesheet">
+    <link href="{% static 'assets/home/css/jquery.fancybox.css' %}"
+          rel="stylesheet">
+    <link rel="icon" href="{% static 'assets/img/favicon.ico' %}"
+          type="image/png">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/home/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- start page-wrapper -->
+<div class="page-wrapper" id="home">
+
+    <!-- start preloader -->
+    <div class="preloader">
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <!-- end preloader -->
+
+    <!-- Start header -->
+    <header id="header" class="site-header header-style-1">
+        <nav class="navigation navbar navbar-default">
+            <div class="site-logo">
+                <a href="#">
+                    <img style="width: 80px; padding-right: 10px"
+                         src="{% static 'assets/img/logo.png' %}"/>
+                </a>
+            </div>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="open-btn">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar"
+                     class="navbar-collapse collapse navigation-holder">
+                    <button class="close-navbar"><i class="fa fa-close"></i>
+                    </button>
+                    <ul class="nav navbar-nav">
+                        <li><a href="#home">Inicio</a></li>
+                        <li><a href="#about">Acerca</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#portfolio">Estadísticas</a></li>
+                        <li><a href="#news">Trámites</a></li>
+                        <li><a href="{% url 'login' %}">Login</a></li>
+                    </ul>
+                </div>
+                <!-- end of nav-collapse -->
+            </div>
+            <!-- end of container -->
+        </nav>
+    </header>
+    <!-- end of header -->
+
+    <!-- start hero-section -->
+    <section class="hero-section">
+        <div class="hero-img">
+            <img src="{% static 'assets/home/images/hero-1.jpg' %}" alt>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-7 col-sm-8">
+                    <div class="content">
+                        <h2>Hacemos que cada proceso sea más facil</h2>
+                        <p>Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry. Lorem Ipsum has been the
+                            industry's standard dummy text ever since the
+                            1500s</p>
+                        <div class="btns">
+                            <a href="#about" class="theme-btn">Más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end hero-section -->
+
+
+    <!-- start about-section -->
+    <section class="about-section" id="about">
+        <div class="content">
+            <div class="left-grid"></div>
+            <div class="right-grid">
+                <div class="inner">
+                    <div class="section-title">
+                        <span>Acerca de nosotros</span>
+                        <h2>¿Qué es Tu Trámite?</h2>
+                    </div>
+                    <div class="details">
+                        <p>Omnis iste natus error sit voluptatem accusantium
+                            dolorem que laudantium, totam rem aperiam, eaque
+                            ipsa quae ab illo inventore veritatis.</p>
+                    </div>
+                    <div class="video-holder">
+                        <a href="https://www.youtube.com/embed/7e90gBu4pas?autoplay=1"
+                           class="video-btn" data-type="iframe">
+                            <i class="fa fa-play"></i> Ver Video
+                        </a>
+                    </div>
+                    <div class="about-pic">
+                        <img src="
+{% static 'assets/home/images/about-pic.png' %}" alt>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end about-section -->
+
+
+    <!-- start services-section -->
+    <section class="services-section section-padding" id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-5">
+                    <div class="section-title-s2">
+                        <span>Nuestros Servicios</span>
+                        <h2>Ofrecemos</h2>
+                    </div>
+                    <div class="skills">
+                        <div class="skill">
+                            <h6>Seguridad</h6>
+                            <div class="progress">
+                                <div class="progress-bar"
+                                     data-percent="90"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <h6>Confianza</h6>
+                            <div class="progress">
+                                <div class="progress-bar"
+                                     data-percent="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill">
+                            <h6>Responsabilidad</h6>
+                            <div class="progress">
+                                <div class="progress-bar"
+                                     data-percent="95"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-md-7">
+                    <div class="services-detail-text">
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit
+                            aspernatur aut odit aut fugit, sed quia consequun
+                            tur magni dolores eos qui ratione voluptatem sequi
+                            nesciunt. Neque porro quisqua mest, qui dolo rem
+                            ipsum quia dolor sit amet, consectetur,
+                            adipisci velit, sed quia nonnum quam eius modi tem
+                            pora incidunt ut labore et.</p>
+                        <p>Ae consequatur, vel illum qui dolorem eum fugiat quo
+                            voluptas nulla pariatur. sed quia non numquam eius
+                            modi tempora incidunt ut labore et dolore magnam
+                            aliquam quaerat voluptatem.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-xs-12">
+                    <div class="service-features-grids">
+                        <div class="grid">
+                            <div class="icon">
+                                <i class="fa fa-balance-scale"
+                                   style="font-size: 3em; margin-bottom:
+                                        5px"></i>
+                            </div>
+                            <h3>Lorem Ipsut</h3>
+                            <p> quis nostrum exercitationem ullam corporis
+                                suscipit laboriosam, nisi ut aliquid ex ea
+                                commodi consequatur Quis autem vel eum iure</p>
+                        </div>
+                        <div class="grid">
+                            <div class="icon">
+                                <i class="fa fa-bookmark" style="font-size: 3em; margin-bottom:
+                                        5px"></i>
+                            </div>
+                            <h3>UX Design</h3>
+                            <p> quis nostrum exercitationem ullam corporis
+                                suscipit laboriosam, nisi ut aliquid ex ea
+                                commodi consequatur Quis autem vel eum iure</p>
+                        </div>
+                        <div class="grid">
+                            <div class="icon">
+                                <i class="fa fa-building" style="font-size: 3em; margin-bottom:
+                                        5px"></i>
+                            </div>
+                            <h3>Photography</h3>
+                            <p> quis nostrum exercitationem ullam corporis
+                                suscipit laboriosam, nisi ut aliquid ex ea
+                                commodi consequatur Quis autem vel eum iure</p>
+                        </div>
+                        <div class="grid">
+                            <div class="icon">
+                                <i class="fa fa-calendar"
+                                   style="font-size: 3em; margin-bottom:
+                                        5px"></i>
+                            </div>
+                            <h3>Branding</h3>
+                            <p> quis nostrum exercitationem ullam corporis
+                                suscipit laboriosam, nisi ut aliquid ex ea
+                                commodi consequatur Quis autem vel eum iure</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end services-section -->
+
+
+    <!-- start portfolio-section -->
+    <section class="portfolio-section" id="portfolio">
+        <div class="portfolio-section-inner">
+            <div class="row">
+                <div class="col col-xs-12">
+                    <div class="section-title-s3">
+                        <span>Ranking de Trámite</span>
+                        <h2>Trámite Más Visitados</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table style--2">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>F. Realización</th>
+                                    <th>Funcionario</th>
+                                    <th>Horario</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for formality in formalities|slice:':10' %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td class="text-justify"
+                                        >{{ formality.name }}</td>
+                                        <td class="text-justify"
+                                        >{{ formality.realization_form }}</td>
+                                        <td>{{ formality.civil_servant }}</td>
+                                        <td>{{ formality.schedule }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end portfolio-section -->
+
+    <!-- start testimonials-section -->
+    <section class="testimonials-section section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col col-xs-12">
+                    <div class="section-title-s3">
+                        <span>Eficiencia</span>
+                        <h2>Cantidad de Trámites por Mes</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-10 col-lg-offset-1">
+                    <div class="details">
+                        <div class="panel-chart col-12">
+                            <div id="oficial-chart">
+                                <canvas id="total-formalities"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end testimonials-section -->
+
+    <!-- start recent-news-section -->
+    <section class="recent-news-section section-padding" id="news">
+        <div class="container">
+            <div class="row">
+                <div class="col col-xs-12">
+                    <div class="section-title-s3">
+                        <span>Trámites</span>
+                        <h2>Listado General</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-xs-12">
+                    <div class="blog-grids">
+                        <section class="main--content">
+                            <div class="form-group"
+                                 style="padding-right: 10px">
+                                <input type="text" id="search"
+                                       class=" form-control"
+                                       placeholder="Buscar...">
+                            </div>
+                            <br>
+                            <div class="table-responsive"
+                                 data-title="Listado Trámites">
+                                <table class="table" id="showAlls">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                        <th>Realización</th>
+                                        <th>Horario</th>
+                                        <th>Funcionario</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for formality in formalities %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ formality.name }}</td>
+                                            <td>{{ formality.description }}</td>
+                                            <td>{{ formality.realization_form }}</td>
+                                            <td>{{ formality.schedule }}</td>
+                                            <td>{{ formality.civil_servant }}</td>
+                                            <td>
+                                                <a href="#showModal"
+                                                   data-toggle="modal"
+                                                   data-slug="{{ formality.slug }}"
+                                                   data-model-plural="tramites"
+                                                   class="btn btn-info
+                                                   ver">Ver</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="showModal" class="modal fade">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header"><h5
+                                                class="modal-title">Detalles
+                                            del Trámite</h5>
+                                            <button type="button" class="close"
+                                                    data-dismiss="modal">
+                                                &times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="table table-simple">
+                                                <tbody>
+                                                <tr>
+                                                    <td>Nombre:</td>
+                                                    <th id="name"></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Descripción:</td>
+                                                    <th id="description"></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fecha de Creación:</td>
+                                                    <th id="created_at"></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Forma de Realización:
+                                                    </td>
+                                                    <th id="realization"></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Requisitos:</td>
+                                                    <th id="requirements"></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Horario:</td>
+                                                    <th id="schedule"></th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Cantidad de Visitas:
+                                                    </td>
+                                                    <th id="total"></th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <br>
+
+                                            <div class="col-sm-10">
+                                                <table class="table">
+                                                    <thead class="thead-light">
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">
+                                                            Archivos
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="iterator-files">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button"
+                                                    class="btn btn-default"
+                                                    data-dismiss="modal">Cerrar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end recent-news-section -->
+
+
+    <!-- start news-letter-section -->
+    <section class="news-letter-section">
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-7">
+                    <div class="newsletter-text">
+                        <h3>Subscribete y recibe noticias &amp;
+                            actualizaciones</h3>
+                    </div>
+                </div>
+                <div class="col col-md-5">
+                    <div class="newsletter-form">
+                        <form>
+                            <div>
+                                <input type="text" class="form-control"
+                                       placeholder="Example@gmail.com..">
+                                <button type="submit">Subscribirme</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end news-letter-section -->
+
+
+    <!-- start contact-section -->
+    <section class="contact-section section-padding" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col col-xs-12">
+                    <div class="section-title-s3">
+                        <span>Contacto</span>
+                        <h2>Escríbenos Estámos Disponible</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row contact-form-info">
+                <div class="col col-md-8">
+                    <div class="contact-form">
+                        <form id="contact-form"
+                              class="contact-validation-active">
+                            <div>
+                                <input type="text" id="name" name="name"
+                                       class="form-control"
+                                       placeholder="Nombre Completo.">
+                            </div>
+                            <div>
+                                <input type="email" id="email" name="email"
+                                       class="form-control"
+                                       placeholder="example@gmail.com">
+                            </div>
+                            <div>
+                                <input type="text" id="subject" name="subject"
+                                       class="form-control"
+                                       placeholder="Asunto..">
+                            </div>
+                            <div>
+                                <input type="text" id="phone" name="phone"
+                                       class="form-control"
+                                       placeholder="Teléfono..">
+                            </div>
+                            <div>
+                                <textarea class="form-control" id="message"
+                                          name="message"
+                                          placeholder="Mensaje.."></textarea>
+                            </div>
+                            <div class="submit">
+                                <button type="submit">Enviar</button>
+                                <div id="loader">
+                                    <i class="fa fa-refresh fa-spin fa-3x fa-fw"></i>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col col-md-3 col-md-offset-1">
+                    <div class="contact-info">
+                        <div>
+                            <h5>Dirección:</h5>
+                            <p>380 St Kilda Road, Sydeny VIC 3004,
+                                Australia</p>
+                        </div>
+                        <div>
+                            <h5>Lineas Telefónicas:</h5>
+                            <p>+123 4567 890</p>
+                        </div>
+                        <div>
+                            <h5>Email:</h5>
+                            <p>info@tutramite.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- end contact-section -->
+
+
+    <!-- start site-footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-12 col-sm-12">
+                    <div class="widget about-widget">
+                        <ul class="sponsors">
+                            <li>
+                                <a href="http://es.presidencia.gov.co/"
+                                   target="_blank">
+                                    <img src="{% static 'assets/img/sponsors/gobierno_colombia.png' %}"
+                                         alt="gobierno_colombia">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://observatorioplanificacion.cepal.org/"
+                                   target="_blank">
+                                    <img src="{% static 'assets/img/sponsors/todos_por_un_nuevo_pais.png' %}"
+                                         alt="todos_por_un_nuevo_pais">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.mintic.gov.co"
+                                   target="_blank">
+                                    <img src="{% static 'assets/img/sponsors/mintic.png' %}"
+                                         alt="mintic">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.mineducacion.gov.co/"
+                                   target="_blank">
+                                    <img src="{% static 'assets/img/sponsors/mineducacion.png' %}"
+                                         alt="mineducacion">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://estrategia.gobiernoenlinea.gov.co/"
+                                   target="_blank">
+                                    <img src="{% static 'assets/img/sponsors/gobierno_digital.png' %}"
+                                         alt="gobierno_digital">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- end upper-footer -->
+            <div class="copyright-info">
+                <div class="container">
+                    <p>2018 &copy; All Rights Reserved by Tu Trámite
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end site-footer -->
+
+</div>
+<!-- end of page-wrapper -->
+
+
+<!-- All JavaScript files
+================================================== -->
+<script src="{% static 'assets/home/js/jquery.min.js' %}"></script>
+<script src="{% static 'assets/home/js/bootstrap.min.js' %}"></script>
+
+<!-- Plugins for this template -->
+<script src="{% static 'assets/home/js/jquery-plugin-collection.js' %}"></script>
+<script src="{% static 'assets/js/Chart.min.js' %}"></script>
+<script src="{% static 'assets/js/datatables.min.js' %}"></script>
+<!-- Custom script for this template -->
+<script src="{% static 'assets/home/js/script.js' %}"></script>
+<script src="{% static 'assets/js/sweetalert-init.js' %}"></script>
+</body>
+
+</html>
+
+<style>
+    .sponsors {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        align-items: normal;
+        padding: 0;
+    }
+
+    .sponsors li {
+        padding: .5em .5em;
+        display: inline-flex;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+        list-style: none;
+    }
+
+    .sponsors img {
+        width: 200px;
+    }
+</style>

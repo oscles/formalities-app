@@ -22,21 +22,21 @@ from django.contrib.auth.views import LogoutView, LoginView
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views import defaults
 
 from apps.api.router import routes
+from apps.civil_servant.views import HomeAnonymousUserTemplateView
 
-'''
-handler404 = defaults.page_not_found(template_name='404.html')
-handler500 = defaults.server_error(template_name='500.html')
-'''
+handler404 = 'apps.core.view_errors.page_not_found_view'
+handler500 = 'apps.core.view_errors.server_error_view'
 
 urlpatterns = [
-	path('', LoginView.as_view(template_name='login.html'), name='login'),
+	path('', HomeAnonymousUserTemplateView.as_view(), name='index'),
+	path('login/', LoginView.as_view(template_name='login.html'),
+	     name='login'),
 	path('logout/', LogoutView.as_view(), name='logout'),
 	path('admin/', admin.site.urls),
 	path('funcionarios/', include('apps.civil_servant.urls')),
 	path('entidades/', include('apps.entity.urls')),
 	path('tramites/', include('apps.formality.urls')),
-	path('api/', include(routes.urls))
+	path('api/', include(routes.urls)),
 ] + (static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))
