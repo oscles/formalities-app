@@ -343,7 +343,7 @@
             </div>
 
             <div class="row">
-                <div class="col col-xs-12">
+                <div class="col col-xs-12 col-sm-12">
                     <div class="blog-grids">
                         <section class="main--content">
                             <div class="form-group"
@@ -353,9 +353,10 @@
                                        placeholder="Buscar...">
                             </div>
                             <br>
-                            <div class="table-responsive"
+                            <div class="table-responsive records--list"
                                  data-title="Listado Trámites">
-                                <table class="table" id="showAlls">
+                                <table class="table"
+                                       id="recordsListView">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
@@ -364,6 +365,7 @@
                                         <th>Realización</th>
                                         <th>Horario</th>
                                         <th>Funcionario</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -401,7 +403,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <table class="table table-simple">
+                                            <table class="table">
                                                 <tbody>
                                                 <tr>
                                                     <td>Nombre:</td>
@@ -435,22 +437,19 @@
                                                 </tr>
                                                 </tbody>
                                             </table>
-                                            <br>
 
-                                            <div class="col-sm-10">
-                                                <table class="table">
-                                                    <thead class="thead-light">
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">
-                                                            Archivos
-                                                        </th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody id="iterator-files">
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                            <table class="table">
+                                                <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">
+                                                        Archivos
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="iterator-files">
+                                                </tbody>
+                                            </table>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button"
@@ -647,8 +646,8 @@
 <!-- Custom script for this template -->
 <script src="{% static 'assets/home/js/script.js' %}"></script>
 <script src="{% static 'assets/js/sweetalert-init.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
 </body>
-
 </html>
 
 <style>
@@ -674,4 +673,136 @@
     .sponsors img {
         width: 200px;
     }
+
+    .records--list {
+        padding-bottom: 30px;
+        color: #696969
+    }
+
+    .records--list .topbar {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        margin-bottom: 13px;
+        padding: 32px 30px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, .08);
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap
+    }
+
+    .records--list .toolbar {
+        min-height: 0;
+        margin-bottom: 0;
+        padding-bottom: 6px;
+        color: #393939;
+        font-weight: 700;
+        text-transform: uppercase
+    }
+
+    .records--list .topbar .right {
+        color: #393939;
+        width: 100%;
+        margin-top: 23px;
+        margin-left: auto;
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center
+    }
+
+    .records--list .dataTable th {
+        padding-bottom: 13px;
+        color: #393939;
+        border-bottom-color: #eee
+    }
+
+    .records--list .dataTable td, .records--list .dataTable th {
+        padding-left: 20px;
+        padding-right: 20px
+    }
+
+    .records--list .dataTable tbody tr td {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ebebea
+    }
+
+    .records--list .dataTable tbody tr:nth-child(odd) {
+        background-color: #f8f8f8
+    }
+
+    .dataTables_wrapper .dataTables_paginate span .paginate_button {
+        min-width: 34px;
+        padding: 4px 0;
+        background: 0 0;
+        border-color: #ebebea;
+        border-radius: 50%
+    }
+
+    .dataTables_wrapper .dataTables_paginate span .paginate_button.current, .dataTables_wrapper .dataTables_paginate span .paginate_button.current:hover, .dataTables_wrapper .dataTables_paginate span .paginate_button:active, .dataTables_wrapper .dataTables_paginate span .paginate_button:hover {
+        color: #fff !important;
+        background: #227fbd;
+        border-color: #227fbd;
+        box-shadow: none
+    }
+
+    .dataTables_wrapper .dataTables_paginate > .paginate_button:active, .dataTables_wrapper .dataTables_paginate > .paginate_button:hover {
+        color: #227fbd !important;
+        background: 0 0;
+        border-color: transparent;
+        box-shadow: none
+    }
+
+    @media (min-width: 768px) {
+        .records--list .topbar .right {
+            width: auto;
+            margin-top: 0
+        }
+    }
+
+    .records--body {
+        padding: 16px 30px 30px
+    }
+
+    .records--body .title {
+        display: -ms-flexbox;
+        display: -webkit-box;
+        display: flex;
+        margin: 7px 0 25px;
+        padding-bottom: 13px;
+        border-bottom: 1px solid #ccc;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap
+    }
+
+    .records--body .title .h6 {
+        color: #393939;
+        font-weight: 700;
+        text-transform: uppercase
+    }
+
+    .records--body .title .btn {
+        margin-left: auto
+    }
+
+    #recordsListView_paginate {
+        float: right;
+    }
+
+    #recordsListView_paginate a {
+        padding: .4em 1em;
+    }
+
+    #recordsListView_next, #recordsListView_previous {
+        cursor: pointer;
+    }
+
 </style>
