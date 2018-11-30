@@ -3,11 +3,13 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import JsonResponse
 from django.urls import reverse_lazy
 from django.views.generic import (
 	TemplateView, CreateView, DeleteView,
 )
 
+from ..core.tasks import send_message, send_subscription
 from ..core.mixins import DeleteViewMixin
 from .forms import CivilServantForm
 from .serializer import CivilServantSerializer
@@ -20,6 +22,19 @@ from ..civil_servant.models import CivilServant
 
 class HomeAnonymousUserTemplateView(TemplateView):
 	template_name = 'index.html'
+
+	def post(self, request, *args, **kwargs):
+		data = dict(request.POST)
+		data.pop('csrfmiddlewaretoken')
+		msg = '''Gracias por escribirnos dentro de poco te estarémos 
+				 contactando'''
+		response = JsonResponse({'message': msg}, status=200)
+		if request.is_ajax():
+			send_message.delay(**data)
+			return response
+		if request.POST:
+			send_subscription.delay(data.get('email'))
+		return super().get(request, *args, **kwargs)
 
 	def get_context_data(self, **kwargs):
 		formalities = Formality.objects.all()

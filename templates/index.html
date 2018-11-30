@@ -37,6 +37,8 @@
     <link rel="icon" href="{% static 'assets/img/favicon.ico' %}"
           type="image/png">
 
+    <link rel="stylesheet" href="{% static 'assets/css/sweetalert.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/sweetalert-overrides.css' %}">
     <!-- Custom styles for this template -->
     <link href="{% static 'assets/home/css/style.css' %}" rel="stylesheet">
 </head>
@@ -85,6 +87,7 @@
                         <li><a href="#services">Servicios</a></li>
                         <li><a href="#portfolio">Estadísticas</a></li>
                         <li><a href="#news">Trámites</a></li>
+                        <li><a href="#contact">Contacto</a></li>
                         <li><a href="{% url 'login' %}">Login</a></li>
                     </ul>
                 </div>
@@ -482,9 +485,11 @@
                 </div>
                 <div class="col col-md-5">
                     <div class="newsletter-form">
-                        <form>
+                        <form method="post">
+                            {% csrf_token %}
                             <div>
                                 <input type="text" class="form-control"
+                                       name="subscriptions"
                                        placeholder="Example@gmail.com..">
                                 <button type="submit">Subscribirme</button>
                             </div>
@@ -513,8 +518,9 @@
             <div class="row contact-form-info">
                 <div class="col col-md-8">
                     <div class="contact-form">
-                        <form id="contact-form"
+                        <form id="contact-form" method="post"
                               class="contact-validation-active">
+                            {% csrf_token %}
                             <div>
                                 <input type="text" id="name" name="name"
                                        class="form-control"
@@ -644,6 +650,7 @@
 <script src="{% static 'assets/js/Chart.min.js' %}"></script>
 <script src="{% static 'assets/js/datatables.min.js' %}"></script>
 <!-- Custom script for this template -->
+<script src="{% static 'assets/js/sweetalert.min.js' %}"></script>
 <script src="{% static 'assets/home/js/script.js' %}"></script>
 <script src="{% static 'assets/js/sweetalert-init.js' %}"></script>
 <script src="{% static 'assets/js/main.js' %}"></script>

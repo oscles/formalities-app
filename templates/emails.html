@@ -363,43 +363,87 @@
                         <td class="wrapper">
                             <table role="presentation" border="0"
                                    cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td>
-                                        <p>Hola {{ username }},</p>
-                                        <p>Bienvenido a Tu Trámite, el lugar
-                                            donde puedes gestionar tus
-                                            trámites desde cualquier lugar
-                                            del mundo, fuiste asignado al
-                                            trámite <strong>{{ formality_name }}</strong>
-                                            haz
-                                            click en el
-                                            botón para ver mas detalles.</p>
-                                        <table role="presentation" border="0"
-                                               cellpadding="0" cellspacing="0"
-                                               class="btn btn-primary">
-                                            <tbody>
-                                            <tr>
-                                                <td align="left">
-                                                    <table role="presentation"
-                                                           border="0"
-                                                           cellpadding="0"
-                                                           cellspacing="0">
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <a href="{{ url }}"
-                                                                   target="_blank">Ver más</a>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <p>Que tengas un excelente día!</p>
-                                    </td>
-                                </tr>
+                                {% if is_formality %}
+                                    <tr>
+                                        <td>
+                                            <p>Hola {{ username }},</p>
+                                            <p>Bienvenido a Tu Trámite, el
+                                                lugar
+                                                donde puedes gestionar tus
+                                                trámites desde cualquier lugar
+                                                del mundo, fuiste asignado al
+                                                trámite
+                                                <strong>{{ formality_name }}</strong>
+                                                haz
+                                                click en el
+                                                botón para ver mas detalles.
+                                            </p>
+                                            <table role="presentation"
+                                                   border="0"
+                                                   cellpadding="0"
+                                                   cellspacing="0"
+                                                   class="btn btn-primary">
+                                                <tbody>
+                                                <tr>
+                                                    <td align="left">
+                                                        <table role="presentation"
+                                                               border="0"
+                                                               cellpadding="0"
+                                                               cellspacing="0">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <a href="{{ url }}"
+                                                                       target="_blank">Ver
+                                                                        más</a>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <p>Que tengas un excelente día!</p>
+                                        </td>
+                                    </tr>
+                                {% elif is_subscription %}
+                                    <tr>
+                                        <td>
+                                            <p>Hola!,</p>
+                                            <p>Bienvenido a Tu Trámite, el
+                                                lugar
+                                                donde puedes gestionar tus
+                                                trámites desde cualquier lugar
+                                                del mundo, hay un usuario que
+                                                quieres subscribirse <strong
+                                                >{{ sender }}</strong></p>
+                                            <p>Que tengas un excelente día!</p>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td>
+                                            <p>Hola,</p>
+                                            <p>Bienvenido a Tu Trámite, el
+                                                lugar
+                                                donde puedes gestionar tus
+                                                trámites desde cualquier lugar
+                                                del mundo.</p>
+                                            <p>
+                                                <strong>Remitente: </strong>
+                                            <p>{{ full_name }}</p>
+                                            <strong>Teléfono: </strong>
+                                            <p>{{ telephone }}</p>
+                                            <strong>Email: </strong>
+                                            <p>{{ from_email }}</p>
+                                            <strong>Mensaje: </strong>
+                                            <p>{{ message }}</p>
+                                            </p>
+                                            <p>Que tengas un excelente día!</p>
+                                        </td>
+                                    </tr>
+                                {% endif %}
                             </table>
                         </td>
                     </tr>
