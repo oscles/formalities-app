@@ -19,7 +19,7 @@ class EntityForm(forms.ModelForm):
 		widgets = {
 			'name': forms.TextInput(attrs={
 				'class': 'form-control',
-				'placeholder': 'Oscloud International'
+				'placeholder': 'Ministerio de las Tecnologías de la Información'
 			}),
 			'nit': forms.TextInput(attrs={
 				'class': 'form-control',
@@ -35,6 +35,6 @@ class EntityForm(forms.ModelForm):
 			}),
 			'website': forms.URLInput(attrs={
 				'class': 'form-control',
-				'placeholder': 'https://www.oscloud.com'
+				'placeholder': 'https://www.mintic.com'
 			})
 		}
